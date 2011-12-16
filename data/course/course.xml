@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<coursedata>
+		<course coursename="Navistar® HVAC 2010 Update" language="eng" lockstepping="false" introduction="true" theme="nav" offline="false" studyguide="true" glossary="true" group="tech">
+			<module>
+				<title>Introduction</title>
+				<text>
+				</text>
+			</module>
+			<module>
+				<title>Components</title>
+				<text>
+				</text>
+				<section>
+					<title>Engine Side Components</title>
+					<text>
+					</text>
+				</section>
+				<section>
+					<title>Interior Components</title>
+					<text>
+					</text>
+				</section>
+				<section>
+					<title>Interior Module Doors</title>
+					<text>				
+					</text>
+				</section>
+			</module>
+			<module>
+				<title>Electrical Sensors</title>
+				<text>				
+				</text>
+			</module>
+			<module>
+				<title>Modes of Operation</title>
+				<text>
+				</text>
+				<section>
+					<title>Air Flow</title>
+					<text>
+					</text>
+				</section>
+				<section>
+					<title>Normal A/C Mode</title>
+					<text>
+					</text>
+				</section>
+				<section>
+					<title>Max A/C Mode</title>
+					<text>
+					</text>
+				</section>
+				<section>
+					<title>Bi-level A/C Mode</title>
+					<text>				
+					</text>
+				</section>
+				<section>
+					<title>Heat and Ventilation IP Vent Mode</title>
+					<text>				
+					</text>
+				</section>
+				<section>
+					<title>Heat and Ventilation Floor Mode</title>
+					<text>				
+					</text>
+				</section>
+				<section>
+					<title>Bi-level Defrost/Heat Mode</title>
+					<text>				
+					</text>
+				</section>
+				<section>
+					<title>Defrost Mode</title>
+					<text>				
+					</text>
+				</section>
+			</module>
+			<module>
+				<title>Diagnostics</title>
+				<text>
+				</text>
+				<section>
+					<title>Preliminary Checks</title>
+					<text>
+					</text>
+				</section>
+				<section>
+					<title>Visual Check</title>
+					<text>
+					</text>
+				</section>
+				<section>
+					<title>Checking for Contamination</title>
+					<text>
+					</text>
+				</section>
+				<section>
+					<title>Part 1</title>
+					<text>
+					</text>
+				</section>
+				<section>
+					<title>exercise</title>
+					<text>				
+					</text>
+				</section>
+				<section>
+					<title>Part 3</title>
+					<text>				
+					</text>
+				</section>
+				<section>
+					<title>Part 1</title>
+					<text>				
+					</text>
+				</section>
+				<section>
+					<title>exercise</title>
+					<text>				
+					</text>
+				</section>
+				<section>
+					<title>Part 3</title>
+					<text>				
+					</text>
+				</section>
+			</module>
+			<module>
+				<title>Conclusion</title>
+				<text>
+				</text>
+			</module>
+		</course>
+	</coursedata>
