@@ -1,135 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 	<coursedata>
-		<course coursename="Navistar® HVAC 2010 Update" language="eng" lockstepping="false" introduction="true" theme="nav" offline="false" studyguide="true" glossary="true" group="tech">
+		<course coursename="Navistar® HVAC 2010 Update" language="eng" lockstepping="false" introduction="true" theme="nav" offline="false" studyguide="true" glossary="true" group="tech" console="true">
 			<module>
 				<title>Introduction</title>
-				<text>
-				</text>
+				<text></text>
 			</module>
+			
 			<module>
-				<title>Components</title>
-				<text>
-				</text>
+				<title>Module 1</title>
+				<text></text>
 				<section>
-					<title>Engine Side Components</title>
-					<text>
-					</text>
+					<title>Module 1: Section 1</title>
+					<text></text>
 				</section>
 				<section>
-					<title>Interior Components</title>
-					<text>
-					</text>
+					<title>Module 1: Section 2</title>
+					<text></text>
 				</section>
 				<section>
-					<title>Interior Module Doors</title>
-					<text>				
-					</text>
+					<title>Module 1: Section 3</title>
+					<text></text>
 				</section>
 			</module>
+			
 			<module>
-				<title>Electrical Sensors</title>
-				<text>				
-				</text>
+				<title>Module 2:</title>
+				<text></text>
 			</module>
+			
 			<module>
-				<title>Modes of Operation</title>
-				<text>
-				</text>
+				<title>Module 3</title>
+				<text></text>
 				<section>
-					<title>Air Flow</title>
-					<text>
-					</text>
+					<title>Module 3: Section 1</title>
+					<text></text>
 				</section>
 				<section>
-					<title>Normal A/C Mode</title>
-					<text>
-					</text>
+					<title>Module 3: Section 2</title>
+					<text></text>
 				</section>
 				<section>
-					<title>Max A/C Mode</title>
-					<text>
-					</text>
-				</section>
-				<section>
-					<title>Bi-level A/C Mode</title>
-					<text>				
-					</text>
-				</section>
-				<section>
-					<title>Heat and Ventilation IP Vent Mode</title>
-					<text>				
-					</text>
-				</section>
-				<section>
-					<title>Heat and Ventilation Floor Mode</title>
-					<text>				
-					</text>
-				</section>
-				<section>
-					<title>Bi-level Defrost/Heat Mode</title>
-					<text>				
-					</text>
-				</section>
-				<section>
-					<title>Defrost Mode</title>
-					<text>				
-					</text>
+					<title>Module 3: Section 3</title>
+					<text></text>
 				</section>
 			</module>
+			
 			<module>
-				<title>Diagnostics</title>
-				<text>
-				</text>
+				<title>Module 4</title>
+				<text></text>
+				
 				<section>
-					<title>Preliminary Checks</title>
-					<text>
-					</text>
+					<title>Module 4: Section 1</title>
+					<text></text>
 				</section>
+				
 				<section>
-					<title>Visual Check</title>
-					<text>
-					</text>
+					<title>Module 4: Section 2</title>
+					<text></text>
+					
+					<part>
+						<title>Module 4: Section 2: Part 1</title>
+						<text></text>
+					</part>
+					
+					<part>
+						<title>Module 4: Section 2: Part 2</title>
+						<text></text>
+					</part>
+					
+					<part>
+						<title>Module 4: Section 2: Part 3</title>
+						<text></text>
+					</part>
+					
 				</section>
-				<section>
-					<title>Checking for Contamination</title>
-					<text>
-					</text>
-				</section>
-				<section>
-					<title>Part 1</title>
-					<text>
-					</text>
-				</section>
-				<section>
-					<title>exercise</title>
-					<text>				
-					</text>
-				</section>
-				<section>
-					<title>Part 3</title>
-					<text>				
-					</text>
-				</section>
-				<section>
-					<title>Part 1</title>
-					<text>				
-					</text>
-				</section>
-				<section>
-					<title>exercise</title>
-					<text>				
-					</text>
-				</section>
-				<section>
-					<title>Part 3</title>
-					<text>				
-					</text>
-				</section>
+				
 			</module>
+			
 			<module>
 				<title>Conclusion</title>
-				<text>
-				</text>
+				<text></text>
 			</module>
 		</course>
 	</coursedata>

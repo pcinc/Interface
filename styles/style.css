@@ -67,4 +67,7 @@ body{
  border: dashed #666;
  padding: 7px 7px 7px 7px;
  background-color: white;
+ width: 700px;
+ height: 100px;
+ overflow:auto;
 }

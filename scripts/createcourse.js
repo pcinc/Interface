@@ -9,8 +9,9 @@ var offline;
 var studyguide;
 var glossary;
 var group;
+var console;
 var completedList = new Array();
-var modules = new Array();
+var videos = new Array();
 var sections = new Array();
 var parts = new Array();
 
@@ -27,9 +28,6 @@ $(document).ready(function(){
 		
 	});
 	
-	$(function() {
-			$( "#console" ).draggable();
-	});
 	
 });
 
@@ -56,9 +54,36 @@ function setAttributes(xml)
 					studyguide = $(this).attr("studyguide");
 					glossary = $(this).attr("glossary");
 					group = $(this).attr("group");
+					console = $(this).attr("console");
 			});
 			
 			setTitle(courseName);
+			$(function(){
+				if(console == 'true')
+					{
+					$('body').append("<div id='console'></div>");
+					$( "#console" ).draggable();
+					}
+				else
+					{
+						
+					}
+			});
+			
+			
+			addToConsole("<span style='font-weight: bold'>Course Data</span>");
+			addToConsole("--------------------------------------------");
+			addToConsole("Course Name: "+courseName);
+			addToConsole("Language: "+language);
+			addToConsole("Lockstepping: "+lockstepping);
+			addToConsole("Introduction: "+introduction);
+			addToConsole("Theme: "+theme);
+			addToConsole("Offline Status: "+offline);
+			addToConsole("Study Guide: "+studyguide);
+			addToConsole("Glossary: "+glossary);
+			addToConsole("Group: "+group);
+			addToConsole("Console: "+console);
+			addToConsole("--------------------------------------------");
 			
 	}
 	
@@ -67,76 +92,95 @@ function createVideoArray(xml)
 	{
 		var courseList;
 		var moduleCount = $('module',xml).length;
-		var moduleIndexA = 0;
-		moduleIndexB = 0;
-		//var modules = new Array();
-		var moduleString = '';
+		var moduleIndex = 0;
+		var videoString = '';
 		
-		while(moduleIndexA < moduleCount)
+		while(moduleIndex < moduleCount)
 			{
-				moduleString += $('module',xml).eq(moduleIndexA).find("title").first().text()+",";
-				moduleIndexA = moduleIndexA + 1;
-			}
-		
-		
-		
-		moduleString = moduleString.slice(0,moduleString.length-1);
-		modules = moduleString.split(",");
-		
-		addToConsole(modules.join());	
-		
-		
-		while(moduleIndexB < modules.length)
-			{
-				currentModuleLength = $(xml).find('module').eq(moduleIndexB).children().length;
-				//addToConsole($(xml).find('module').eq(1).children().length);
-				if(currentModuleLength > 2)
+				var currentModuleLength = $(xml).find('module').eq(moduleIndex).children('section').length;
+				//addToConsole(currentModuleLength);
+				if(currentModuleLength > 0)
 					{
-						addToConsole(moduleIndexB);
-							
+						videoString += getSections(xml,moduleIndex);
 					}
 				else
 					{
-							completedList.push($(xml).find('module').eq(moduleIndexB).find('title').text());
+						//addToConsole(currentModuleLength);
+						videoString += $('module',xml).eq(moduleIndex).find("title").first().text()+",";
 					}
-					
-					moduleIndexB = moduleIndexB +1;
+				
+				
+				//videoString += $('module',xml).eq(moduleIndex).find("title").first().text()+",";
+				moduleIndex = moduleIndex + 1;
 			}
 		
 		
-		//getSections(xml, modules);
+		
+		videoString = videoString.slice(0,videoString.length-1);
+		videos = videoString.split(",");
+		
+		addToConsole("<span style='font-weight: bold'>Video List</span>");
+		addToConsole("--------------------------------------------");
+		$(videos).each(function()
+			{
+				addToConsole(this);	
+			});
+		addToConsole("--------------------------------------------");	
+		
 	}
 	
 	
-function getSections(xml, modules)
+function getSections(xml, moduleIndex)
 	{
+		var sectionTitle = "";
+		var sectionIndex = 0;
+
+		var sectionCount = $(xml).find('module').eq(moduleIndex).children('section').length;
 		
-		moduleIndex = 0;
-		
-		
-		
-		while(moduleIndex < modules.length)
+		while(sectionIndex < sectionCount)
 			{
-				currentModuleLength = $(xml).find('module').eq(moduleIndex).children().length;
-				//addToConsole($(xml).find('module').eq(1).children().length);
-				if(currentModuleLength > 2)
+				var currentSectionLength = $(xml).find('module').eq(moduleIndex).children('section').eq(sectionIndex).children('part').length;
+				//addToConsole(currentSectionLength);
+				if(currentSectionLength > 0)
 					{
-						addToConsole(moduleIndex);
-							
+						
+						sectionTitle += getParts(xml, moduleIndex, sectionIndex);
+						
+						//sectionTitle += $(xml).find('module').eq(moduleIndex).children('section').eq(sectionIndex).children('part').text();
+						
 					}
 				else
 					{
-							completedList.push($(xml).find('module').eq(moduleIndex).find('title').text());
+						sectionTitle += $('module',xml).eq(moduleIndex).children('section').eq(sectionIndex).find("title").text()+",";
 					}
-					
-					moduleIndex = moduleIndex +1;
+				
+				
+				sectionIndex = sectionIndex +1;
+				
 			}
 		
 		
-		
-		//addToConsole(test);
+		return sectionTitle;
 	}
 	
+function getParts(xml, moduleIndex, sectionIndex)
+	{
+		var partTitle = "";
+		var partIndex = 0;
+		
+		var partCount = $(xml).find('module').eq(moduleIndex).children('section').eq(sectionIndex).children('part').length;
+		//addToConsole(partCount);
+		while(partIndex < partCount)
+			{
+				partTitle += $(xml).find('module').eq(moduleIndex).children('section').eq(sectionIndex).children('part').eq(partIndex).text()+",";
+				
+				//addToConsole(partTitle);
+				partIndex = partIndex +1;
+			}
+		
+		return partTitle;
+		
+	}
 	
 function createMenu(xml)
 	{
@@ -153,5 +197,7 @@ function setTitle(courseName)
 	
 function addToConsole(message)
 	{
-		$("#console").append(message+"<br />");
+		
+				$("#console").append(message+"<br />");
+	
 	}
