@@ -1,7 +1,7 @@
 *{
 	padding: 0px 0px 0px 0px;
 	margin: 0px 0px 0px 0px;
-	font-family:Arial, Helvetica, sans-serif;	
+	
 }
 
 body{
@@ -21,6 +21,8 @@ body{
 	background-color:#F0F;
 	width: 950px;
 	height: 660px;
+	font-family:Arial, Helvetica, sans-serif;	
+	overflow:hidden;
 }
 
 #header{
@@ -46,7 +48,7 @@ body{
 #headertop{
 	position: relative;
 	height: 36px;
-	background-color: #ed730f;
+	background-color:#F00;
 	width: 950px;
 	
 }
@@ -56,7 +58,7 @@ body{
 	height: 42px;
 	background-color: #CCC;
 	width: 950px;
-	background-image:url(../images/headermiddle.png)
+	background-image:url('../images/headermiddle.png')
 }
 
 #headerbottom{
@@ -73,6 +75,52 @@ body{
 	background-repeat:no-repeat;
 }
 
+
+#contentleft{
+	position: relative;
+	float: left;
+	height: 512px;
+	width: 750px;
+	/*background-color: #900;*/
+}
+#contentright{
+	position: relative;
+	float: right;
+	height: 512px;
+	width: 200px;
+	/*background-color:#CCC*/
+}
+#navhandle{
+	position: relative;
+	float:left;
+	width: 20px;
+	height:50px;
+	background-color: #333;
+	margin: 200px 0px 0px 0px;
+	background-image:url('../images/tabin.png');
+	cursor: pointer;
+}
+#navmenu{
+position: relative;
+float: left;
+width: 180px;
+height: 512px;
+/*background-color:#00F;*/
+overflow-x: hidden;
+overflow-y: hidden;
+background-image:url('../images/navbackground.png');
+}
+
+#navmenu ul{
+	list-style:none;	
+}
+
+#navmenu ul li{
+	width: 160px;
+	height: 90px;
+	background-color:#0F0;
+	margin: 10px 0px 0px 10px;
+}
 #footer{
 	position: relative;
 	float:left;
@@ -81,6 +129,12 @@ body{
 	background-image:url('../images/footerbackground.png');
 }
 
+
+#vidPlayer{
+	position:relative;
+	float:left;
+	margin: 70px 0px 0px 55px;
+}
 #innerfooter {
     background-image: url("../images/footerInner.png");
     border: 3px solid #333333;
@@ -108,3 +162,4 @@ width:950px;
 height:36px;
 background-image:url('../images/top_950.png');	
 }
+

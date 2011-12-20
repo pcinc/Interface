@@ -13,8 +13,7 @@ var console;
 var courseLength;
 var completedList = new Array();
 var videos = new Array();
-var sections = new Array();
-var parts = new Array();
+var menuShown = 'true';
 
 
 // Start function when DOM has completely loaded 
@@ -23,14 +22,35 @@ $(document).ready(function(){
 		type: "get",
 		url: "data/course/course.xml",
 		dataType: "xml",
-		success: parseXml
-		
-	
-		
+		success: parseXml		
 	});
 	
 	
+	$('#navhandle').click(function(){
+		if(menuShown === 'true')
+			{
+				menuShown = 'false';
+				$("#navhandle").css("background-image", "url(images/tabout.png)");
+				$("#navmenu").animate({width:"0px"}, 500 );
+				$("#contentright").animate({width:"20px"}, 500 );
+				$("#contentleft").show("normal").animate({width:"930px"}, 500);
+				$("#vidPlayer").animate({marginLeft: "145px"},500);
+				
+			}
+		else
+			{
+				$("#navmenu").animate({width:"180px"}, 500 );
+				$("#contentright").animate({width:"200px"}, 500 );
+				$("#contentleft").show("normal").animate({width:"750px"}, 500);
+				$("#vidPlayer").animate({marginLeft: "55px"},500);
+				$("#navhandle").css("background-image", "url(images/tabin.png)");
+				menuShown = 'true';
+			}
+	});
+	
 });
+
+
 
 function parseXml(xml)
 	{
@@ -207,3 +227,4 @@ function addToConsole(message)
 				$("#console").append(message+"<br />");
 	
 	}
+	
