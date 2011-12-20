@@ -10,6 +10,7 @@ var studyguide;
 var glossary;
 var group;
 var console;
+var courseLength;
 var completedList = new Array();
 var videos = new Array();
 var sections = new Array();
@@ -71,9 +72,12 @@ function setAttributes(xml)
 			});
 			
 			
+			document.title= courseName;
+			
 			addToConsole("<span style='font-weight: bold'>Course Data</span>");
 			addToConsole("--------------------------------------------");
 			addToConsole("Course Name: "+courseName);
+			addToConsole("<span id='courseLength'>Course Length: </span>");
 			addToConsole("Language: "+language);
 			addToConsole("Lockstepping: "+lockstepping);
 			addToConsole("Introduction: "+introduction);
@@ -119,6 +123,8 @@ function createVideoArray(xml)
 		videoString = videoString.slice(0,videoString.length-1);
 		videos = videoString.split(",");
 		
+		courseLength = videos.length;
+		$('#courseLength').append(courseLength);
 		addToConsole("<span style='font-weight: bold'>Video List</span>");
 		addToConsole("--------------------------------------------");
 		$(videos).each(function()
