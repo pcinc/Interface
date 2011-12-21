@@ -113,7 +113,7 @@ var VideoJS = JRClass.extend({
     if (typeof event == "string") { event = { type: event }; }
     if (event.type) { this.history.push(event.type); }
     if (this.history.length >= 50) { this.history.shift(); }
-    try { console.log(event.type); } catch(e) { try { opera.postError(event.type); } catch(e){} }
+   // try { console.log(event.type); } catch(e) { try { opera.postError(event.type); } catch(e){} }
   },
   /* Local Storage
   ================================================================================ */
@@ -1279,7 +1279,7 @@ VideoJS.player.newBehavior("currentTimeScrubber", function(element){
     onCurrentTimeScrubberMouseDown: function(event, scrubber){
       event.preventDefault();
       this.currentScrubber = scrubber;
-
+s
       this.stopTrackingCurrentTime(); // Allows for smooth scrubbing
 
       this.videoWasPlaying = !this.paused();
