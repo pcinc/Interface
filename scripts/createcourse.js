@@ -57,30 +57,7 @@ $(document).ready(function(){
 });
 
 
-function setLocation(location)
-	{
-		if(location === '0')
-		{
-			pageIndex = '0';
-		}
-	else
-		{
-			pageIndex = location;
-		}	
-		
-		createLesson(pageIndex);
-	}
 
-function createLesson(pageIndex){
-	
-	$("#test").empty();
-    $("#test").append('<video id="lessonplayer" class="video-js" width="640" height="360" controls="controls" preload="auto" poster=""><source src="videos/'+pageIndex+'.mov" type=\'video/mp4; codecs="avc1.42E01E, mp4a.40.2"\' /><object id="flash_fallback_1" class="vjs-flash-fallback" width="640" height="360" type="application/x-shockwave-flash" data="scripts/flowplayer-3.2.7.swf"><param name="movie" value="scripts/flowplayer-3.2.7.swf" /><param name="allowfullscreen" value="false" /><param name="flashvars" value=\'config={"playlist":[ {"url": "videos/'+pageIndex+'.mov","autoPlay":false,"autoBuffering":true}]}\' /></object></video>');
-	$('lessonplayer').VideoJS();
-	VideoJS.setup('lessonplayer');
-		
-		
-		
-}
 
 function parseXml(xml)
 	{
@@ -257,4 +234,28 @@ function addToConsole(message)
 				$("#console").append(message+"<br />");
 	
 	}
-	
+
+function setLocation(location)
+	{
+		if(location === '0')
+		{
+			pageIndex = '0';
+		}
+	else
+		{
+			pageIndex = location;
+		}	
+		
+		createLesson(pageIndex);
+	}
+
+function createLesson(pageIndex){	
+	$("#test").empty();
+    $("#test").append('<video id="lessonplayer" class="video-js" width="640" height="360" controls="controls" preload="auto" poster=""><source src="videos/'+pageIndex+'.mov" type=\'video/mp4; codecs="avc1.42E01E, mp4a.40.2"\' /><object id="flash_fallback_1" class="vjs-flash-fallback" width="640" height="360" type="application/x-shockwave-flash" data="scripts/flowplayer-3.2.7.swf"><param name="movie" value="scripts/flowplayer-3.2.7.swf" /><param name="allowfullscreen" value="false" /><param name="flashvars" value=\'config={"playlist":[ {"url": "videos/'+pageIndex+'.mov","autoPlay":false,"autoBuffering":true}]}\' /></object></video>');
+	$('lessonplayer').VideoJS();
+	VideoJS.setup('lessonplayer');
+	$("#lessonname").empty().append(videos[pageIndex].text());
+		
+		
+		
+}0	
