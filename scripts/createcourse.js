@@ -16,6 +16,7 @@ var videos = new Array();
 var menuShown = 'true';
 var pageIndex;
 var lesson_location = '0';
+var currentLessonName = '';
 
 // Start function when DOM has completely loaded 
 $(document).ready(function(){ 
@@ -35,7 +36,7 @@ $(document).ready(function(){
 				$("#navmenu").animate({width:"0px"}, 500 );
 				$("#contentright").animate({width:"20px"}, 500 );
 				$("#contentleft").show("normal").animate({width:"930px"}, 500);
-				$("#vidPlayer").animate({marginLeft: "145px"},500);
+				$("#player").animate({marginLeft: "145px"},500);
 				
 			}
 		else
@@ -43,14 +44,14 @@ $(document).ready(function(){
 				$("#navmenu").animate({width:"180px"}, 500 );
 				$("#contentright").animate({width:"200px"}, 500 );
 				$("#contentleft").show("normal").animate({width:"750px"}, 500);
-				$("#vidPlayer").animate({marginLeft: "55px"},500);
+				$("#player").animate({marginLeft: "55px"},500);
 				$("#navhandle").css("background-image", "url(images/tabin.png)");
 				menuShown = 'true';
 			}
 	});
 	
 	
-	setLocation(lesson_location);
+	
 	
 	
 	
@@ -64,6 +65,7 @@ function parseXml(xml)
 		setAttributes(xml);
 		createVideoArray(xml);
 		createMenu(xml);
+		setLocation(lesson_location);
 	
 	}
  
@@ -217,6 +219,17 @@ function getParts(xml, moduleIndex, sectionIndex)
 	
 function createMenu(xml)
 	{
+			var menuIndex = 0;
+			
+			while(menuIndex < $(videos).length)
+				{
+					$("#menu").append('<li onclick="createLesson('+menuIndex+')"><div id="sectionname">Module 1:</div><div id="sectiontitle">'+ videos[menuIndex]+'</div></li>');
+					
+					menuIndex = menuIndex +1;
+				}
+			
+	
+		
 		
 		
 		
@@ -251,11 +264,21 @@ function setLocation(location)
 
 function createLesson(pageIndex){	
 	$("#test").empty();
-    $("#test").append('<video id="lessonplayer" class="video-js" width="640" height="360" controls="controls" preload="auto" poster=""><source src="videos/'+pageIndex+'.mov" type=\'video/mp4; codecs="avc1.42E01E, mp4a.40.2"\' /><object id="flash_fallback_1" class="vjs-flash-fallback" width="640" height="360" type="application/x-shockwave-flash" data="scripts/flowplayer-3.2.7.swf"><param name="movie" value="scripts/flowplayer-3.2.7.swf" /><param name="allowfullscreen" value="false" /><param name="flashvars" value=\'config={"playlist":[ {"url": "videos/'+pageIndex+'.mov","autoPlay":false,"autoBuffering":true}]}\' /></object></video>');
+    $("#test").append('<video id="lessonplayer" class="video-js" width="640" height="360" controls="controls" preload="auto"><source src="videos/'+pageIndex+'.mov" type=\'video/mp4; codecs="avc1.42E01E, mp4a.40.2"\' /><object id="flash_fallback_1" class="vjs-flash-fallback" width="640" height="360" type="application/x-shockwave-flash" data="scripts/flowplayer-3.2.7.swf"><param name="movie" value="scripts/flowplayer-3.2.7.swf" /><param name="allowfullscreen" value="false" /><param name="flashvars" value=\'config={"playlist":[ {"url": "videos/'+pageIndex+'.mov","autoPlay":false,"autoBuffering":true}]}\' /></object></video>');
 	$('lessonplayer').VideoJS();
 	VideoJS.setup('lessonplayer');
-	$("#lessonname").empty().append(videos[pageIndex].text());
+	
+	currentLessonName = videos[pageIndex];
+	
+	setLessonName(currentLessonName);
 		
 		
 		
-}0	
+}
+
+function setLessonName(currentLessonName)
+	{
+		$("#lessonname").empty();
+		$("#lessonname").append(currentLessonName);
+			
+	}
