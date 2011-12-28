@@ -203,3 +203,22 @@ background-image:url('../images/top_950.png');
 	background-color: #666;
 	box-shadow: 7px 7px 10px #000;
 }
+
+#menuup{
+	position:absolute;
+	float:left;	
+	background-image:url('../images/menuUp.png');
+	width: 182px;
+	height: 18px;
+}
+
+#menudown{
+	position: absolute;
+	float: left;
+	background-image:url('../images/menuDown.png');
+	width: 182px;
+	height: 18px;
+	z-index: 99;
+	bottom: 0px;
+	margin: 476px 0px 0px 0px;
+}

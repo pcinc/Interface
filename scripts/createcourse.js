@@ -17,6 +17,7 @@ var menuShown = 'true';
 var pageIndex;
 var lesson_location = '0';
 var currentLessonName = '';
+var clickIndex = 0;
 
 // Start function when DOM has completely loaded 
 $(document).ready(function(){ 
@@ -51,7 +52,38 @@ $(document).ready(function(){
 	});
 	
 	
+	$("#menuup").click(function(){
+		
+		
 	
+		if(clickIndex < videos.length)
+		{	
+			clickIndex ++;
+		var moveValue = ""+(-(100*clickIndex))+"px";
+			$("#menu").animate({marginTop: moveValue}, 1000);
+			
+			
+		}
+		
+		
+	});
+	
+		$("#menudown").click(function(){
+		
+	
+	
+		if( clickIndex > 0)
+		{	
+			clickIndex --;
+			var moveValue = ""+(-(100*clickIndex))+"px";
+			
+			$("#menu").animate({marginTop: moveValue}, 1000);
+			
+			
+		}
+		
+		
+	});
 	
 	
 	
@@ -227,13 +259,7 @@ function createMenu(xml)
 					
 					menuIndex = menuIndex +1;
 				}
-			
-	
-		
-		
-		
-		
-	}
+		}
 	
 function setTitle(courseName)
 	{

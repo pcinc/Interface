@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 	<coursedata>
-		<course coursename="Navistar® HVAC 2010 Update" language="eng" lockstepping="false" introduction="true" theme="nav" offline="false" studyguide="true" glossary="true" group="tech" console="false">
+		<course coursename="Navistar® HVAC 2010 Update" language="eng" lockstepping="false" introduction="true" theme="nav" offline="false" studyguide="true" glossary="true" group="tech" console="true">
 			<module>
 				<title>Introduction</title>
 				<text></text>
