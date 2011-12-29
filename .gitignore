@@ -6,3 +6,4 @@ scripts/_notes/dwsync.xml
 data/course/images/.DS_Store
 scripts/video-js/.DS_Store
 styles/.DS_Store
+*.LCK
