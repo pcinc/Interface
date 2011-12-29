@@ -2,3 +2,7 @@ _notes/dwsync.xml
 data/course/_notes/dwsync.xml
 styles/_notes/dwsync.xml
 scripts/_notes/dwsync.xml
+.DS_Store
+data/course/images/.DS_Store
+scripts/video-js/.DS_Store
+styles/.DS_Store
