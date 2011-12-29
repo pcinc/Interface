@@ -56,9 +56,9 @@ $(document).ready(function(){
 		
 		
 	
-		if(clickIndex < videos.length)
+		if( clickIndex > 0)
 		{	
-			clickIndex ++;
+			clickIndex --;
 		var moveValue = ""+(-(100*clickIndex))+"px";
 			$("#menu").animate({marginTop: moveValue}, 1000);
 			
@@ -72,9 +72,9 @@ $(document).ready(function(){
 		
 	
 	
-		if( clickIndex > 0)
+		if(clickIndex < videos.length)
 		{	
-			clickIndex --;
+			clickIndex ++;
 			var moveValue = ""+(-(100*clickIndex))+"px";
 			
 			$("#menu").animate({marginTop: moveValue}, 1000);
