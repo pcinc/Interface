@@ -1,0 +1,17 @@
+#headertop{
+	position: relative;
+	height: 36px;
+	width: 950px;
+	background-color: #00355f;
+	
+}
+
+#logo{
+	position:relative;
+	float:right;
+	background-image:url('../skins/nav/images/nav.png');
+	width: 289px;
+	height: 37px;
+	margin: 5px 10px 0px 0px;
+	
+}

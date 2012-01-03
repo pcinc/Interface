@@ -5,7 +5,9 @@
 }
 
 body{
-	background-color:#444444;	
+	background-color:#444444;
+	background:url('../images/bg.jpg');
+	background-repeat:repeat-x;
 }
 #fakebar {
     background-image: url("../images/blackbar.png");
@@ -47,7 +49,7 @@ body{
 	position: relative;
 	height: 36px;
 	width: 950px;
-	background-color: #C60;
+	/*background-color: #C60;*/
 	
 }
 

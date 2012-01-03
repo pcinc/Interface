@@ -25,7 +25,8 @@ $(document).ready(function(){
 		type: "get",
 		url: "data/course/course.xml",
 		dataType: "xml",
-		success: parseXml		
+		success: parseXml	
+		
 	});
 	
 	
@@ -72,7 +73,7 @@ $(document).ready(function(){
 		
 	
 	
-		if(clickIndex < videos.length)
+		if(clickIndex < videos.length-3)
 		{	
 			clickIndex ++;
 			var moveValue = ""+(-(100*clickIndex))+"px";
@@ -98,6 +99,7 @@ function parseXml(xml)
 		createVideoArray(xml);
 		createMenu(xml);
 		setLocation(lesson_location);
+		loadStyle(theme);
 	
 	}
  
@@ -308,3 +310,15 @@ function setLessonName(currentLessonName)
 		$("#lessonname").append(currentLessonName);
 			
 	}
+
+function loadStyle(theme){
+	
+	
+	 var fileref=document.createElement("link")
+  	fileref.setAttribute("rel", "stylesheet")
+ 	 fileref.setAttribute("type", "text/css")
+ 	 fileref.setAttribute("href", "styles/"+theme+".css")
+	 
+	 document.getElementsByTagName("head")[0].appendChild(fileref);
+	 addToConsole("styles/"+theme+".css");
+}

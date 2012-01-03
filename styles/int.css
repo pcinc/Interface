@@ -1,0 +1,18 @@
+#headertop{
+	position: relative;
+	height: 36px;
+	width: 950px;
+	background-color: #eb6e1f;
+	
+}
+
+#logo{
+	position:relative;
+	float:right;
+	background-image:url('../skins/int/images/int.png');
+	width: 37px;
+	height: 40px;
+	margin: 5px 3px 0px 0px;
+	background-repeat:no-repeat;
+	
+}
