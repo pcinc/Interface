@@ -9,7 +9,7 @@ var offline;
 var studyguide;
 var glossary;
 var group;
-var debugconsole;
+var debugConsole;
 var courseLength;
 var completedList = new Array();
 var videos = new Array();
@@ -18,6 +18,7 @@ var pageIndex;
 var lesson_location = '0';
 var currentLessonName = '';
 var clickIndex = 0;
+var locations = new Array();
 
 // Start function when DOM has completely loaded 
 $(document).ready(function(){ 
@@ -68,9 +69,10 @@ $(document).ready(function(){
 		
 		if( clickIndex > 0)
 			{	
+				clickIndex --;
 				var moveValue = ""+(-(100*clickIndex))+"px";
 				
-				clickIndex --;
+				
 		
 				$("#menu").animate({marginTop: moveValue}, 1000);
 			}
@@ -81,9 +83,10 @@ $(document).ready(function(){
 		
 		if(clickIndex < videos.length-3)
 			{	
+				clickIndex ++;
 				var moveValue = ""+(-(100*clickIndex))+"px";
 				
-				clickIndex ++;
+				
 			
 				$("#menu").animate({marginTop: moveValue}, 1000);
 			}
@@ -126,13 +129,13 @@ function setAttributes(xml)
 				
 				group = $(this).attr("group");
 				
-				debugconsole = $(this).attr("console");
+				debugConsole = $(this).attr("console");
 			});
 			
 			setTitle(courseName);
 			
 		$(function(){
-			if(debugconsole == 'true')
+			if(debugConsole == 'true')
 				{
 					$('body').append("<div id='console'></div>");
 					$( "#console" ).draggable();
@@ -183,6 +186,7 @@ function createVideoArray(xml)
 		var moduleCount = $('module',xml).length;
 		var moduleIndex = 0;
 		var videoString = '';
+		var locationsString = '';
 		
 		while(moduleIndex < moduleCount)
 			{
@@ -190,17 +194,18 @@ function createVideoArray(xml)
 				
 				if(currentModuleLength > 0)
 					{
+						
 						videoString += getSections(xml,moduleIndex);
+						
 					}
 				else
 					{
-						videoString += $('module',xml).eq(moduleIndex).find("title").first().text()+",";
+						videoString += "m"+moduleIndex+"/@"+$('module',xml).eq(moduleIndex).find("title").first().text()+",";
 					}
 				
 				moduleIndex = moduleIndex + 1;
 			}
-		
-		
+
 		
 		videoString = videoString.slice(0,videoString.length-1);
 		
@@ -219,7 +224,7 @@ function createVideoArray(xml)
 				addToConsole(this);	
 			});
 		
-		addToConsole("--------------------------------------------");	
+		addToConsole("--------------------------------------------");
 		
 	}
 	
@@ -240,7 +245,7 @@ function getSections(xml, moduleIndex)
 					}
 				else
 					{
-						sectionTitle += $('module',xml).eq(moduleIndex).children('section').eq(sectionIndex).find("title").text()+",";
+						sectionTitle += "m"+moduleIndex+"s"+(sectionIndex+1)+"/@"+$('module',xml).eq(moduleIndex).children('section').eq(sectionIndex).find("title").text()+",";
 					}
 				
 				sectionIndex = sectionIndex +1;
@@ -259,7 +264,7 @@ function getParts(xml, moduleIndex, sectionIndex)
 		
 		while(partIndex < partCount)
 			{
-				partTitle += $(xml).find('module').eq(moduleIndex).children('section').eq(sectionIndex).children('part').eq(partIndex).text()+",";
+				partTitle += "m"+moduleIndex+"s"+(sectionIndex+1)+"p"+(partIndex+1)+"/@"+$(xml).find('module').eq(moduleIndex).children('section').eq(sectionIndex).children('part').eq(partIndex).text()+",";
 				
 				partIndex = partIndex +1;
 			}
@@ -272,13 +277,46 @@ function createMenu(xml)
 	{
 		var menuIndex = 0;
 		
+		
+		
+		
 		while(menuIndex < $(videos).length)
 			{
-				$("#menu").append('<li onclick="createLesson('+menuIndex+')"><div id="sectionname">Module 1:</div><div id="sectiontitle">'+ videos[menuIndex]+'</div></li>');
+				var itemName = videos[menuIndex].split('/@');
+				var str = '<li onclick="createLesson('+menuIndex+')"><div id="sectionname">'+getLocation(menuIndex,itemName[0], xml)+'</div><div id="sectiontitle">'+ itemName[1]+'</div></li>';
+				
+				$("#menu").append(str);
 				
 				menuIndex = menuIndex +1;
 			}
 		}
+	
+function getLocation(menuIndex, itemName,xml)
+	{
+		var location;
+		
+		addToConsole('m'+($(xml).find('module').length -1));
+		
+		if(itemName.indexOf('m0') != -1 || itemName.indexOf('m'+($(xml).find('module').length-1)) != -1)
+			{
+				location = '';
+			}
+		else if(itemName.indexOf('p') != -1)
+			{
+					location = "Part " + itemName.split('p')[1] + ":";
+			}
+		else if(itemName.indexOf('s') != -1)
+			{
+				location = "Section " + itemName.split('s')[1] + ":";
+			}
+		else if(itemName.indexOf('m') != -1)
+			{
+				location = "Module " + itemName.split('m')[1] + ":";	
+			}
+		
+		
+		return location;
+	}
 	
 function setTitle(courseName)
 	{
@@ -314,7 +352,7 @@ function createLesson(pageIndex)
 		$('lessonplayer').VideoJS();
 		VideoJS.setup('lessonplayer');
 		
-		currentLessonName = videos[pageIndex];
+		currentLessonName = videos[pageIndex].split('/@')[1];
 		
 		setLessonName(currentLessonName);
 			
