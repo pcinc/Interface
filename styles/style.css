@@ -2,6 +2,7 @@
 	padding: 0px 0px 0px 0px;
 	margin: 0px 0px 0px 0px;
 	
+	
 }
 
 body{
@@ -107,17 +108,63 @@ background-image:url('../images/navbackground.png');
 }
 
 #navmenu ul{
-	list-style:none;	
+	list-style:none;
+	margin: 20px 0px 0px 0px;	
+}
+
+
+#menuItem{
+	margin: 10px 0px 0px 10px;
+	cursor: pointer;
+	background-image:url('../data/course/images/posterbackground.png');
 }
 
 #navmenu ul li{
 	width: 160px;
 	height: 90px;
-	margin: 10px 0px 0px 10px;
-	background-image:url('../data/course/images/posterbackground.png');
-	color:#CCC;
-	cursor: pointer;
 	
+	color:#CCC;
+	
+	
+}
+
+#modulebreak{
+	width: 160px;
+	height: 90px;
+	margin: 10px 0px 0px 1px;
+	background-image:none;
+	letter-spacing: 0.7px;
+	font-size: 10pt;
+	cursor:default;
+	background-color:#363636;
+	background-image:none;
+	
+}
+
+#modulebreak div{
+	
+}
+
+#breaktitle{
+	margin:0px 0px 0px 7px;
+	background-image:url('../images/solidline.png');
+	background-repeat:repeat-x;
+	background-position: 0px 8px;
+}
+
+#menudeco{
+	position:relative;
+	height: 16px;
+	width: 62px;
+	float: right;
+		background-image:url('../images/menudeco.png');
+		background-repeat:no-repeat;
+		background-position: 0px 8px;
+		background-color:#363636;
+}
+#modulebreak div span{
+	background-color:#363636;
+	padding: 0px 3px 0px 0px;	
 }
 
 #navmenu ul li #sectiontitle{
@@ -181,6 +228,7 @@ background-image:url('../images/navbackground.png');
  width: 700px;
  height: 100px;
  overflow:auto;
+ z-index: 100;
 }
 
 #headerdecoration{
@@ -214,6 +262,7 @@ background-image:url('../images/top_950.png');
 	width: 182px;
 	height: 18px;
 	cursor: pointer;
+	z-index:98;
 }
 
 #menudown{
