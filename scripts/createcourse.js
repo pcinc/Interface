@@ -326,7 +326,7 @@ function createMenuItem(xml, menuIndex, itemName, itemLocation)
 					}
 				else if(itemLocation.indexOf('p1') != -1)
 					{
-						menuItemString = '<li id="modulebreak" style="width: 176px; height: 16px;"><div id="breaktitle"><span>'+langCheck('part',itemLocation.split('m')[1].split('s')[1].split('p')[0])+'</span><div id="menudeco"></div></div></li><li id="menuItem" onclick="createLesson('+menuIndex+')" style="width: 142px; height: 80px; margin-left: 28px;"><div id="sectionname" style=" width: 142px; font-size:6pt;">'+getLocation(menuIndex,itemLocation, xml)+'</div><div id="sectiontitle" style="width:142px;font-size:8pt;">'+ itemName+'</div></li>';
+						menuItemString = '<li id="modulebreak" style="width: 162px; height: 16px; margin: 10px 0px 0px 10px;"><div id="breaktitle"><span>'+langCheck('part',itemLocation.split('m')[1].split('s')[1].split('p')[0])+'</span><div id="menudeco"></div></div></li><li id="menuItem" onclick="createLesson('+menuIndex+')" style="width: 142px; height: 80px; margin-left: 28px;"><div id="sectionname" style=" width: 142px; font-size:6pt;">'+getLocation(menuIndex,itemLocation, xml)+'</div><div id="sectiontitle" style="width:142px;font-size:8pt;">'+ itemName+'</div></li>';
 					}
 				else
 					{
