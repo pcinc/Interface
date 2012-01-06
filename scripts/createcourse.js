@@ -101,8 +101,7 @@ function parseXml(xml)
 	{
 		setAttributes(xml);
 		createVideoArray(xml);
-		createMenu(xml);
-		setLocation(lesson_location);
+		setLocation(lesson_location,xml);
 		loadStyle(theme);
 	}
  
@@ -306,7 +305,7 @@ function createMenuItem(xml, menuIndex, itemName, itemLocation)
 			{
 				if(itemLocation.indexOf('m0') != -1)
 					{				
-						menuItemString = '<li id="modulebreak" style="width: 176px; height: 16px; "><div id="breaktitle"><span>Introduction</span><div id="menudeco"></div></div></li><li id="menuItem" onclick="createLesson('+menuIndex+')"><div id="sectionname">'+getLocation(menuIndex,itemLocation, xml)+'</div><div id="sectiontitle">'+ itemName+'</div></li>';
+						menuItemString = '<li id="modulebreak" style="width: 176px; height: 16px; "><div id="breaktitle"><span>'+langCheck('introduction',itemLocation.split('m')[1])+'</span><div id="menudeco"></div></div></li><li id="menuItem" onclick="createLesson('+menuIndex+')"><div id="sectionname">'+getLocation(menuIndex,itemLocation, xml)+'</div><div id="sectiontitle">'+ itemName+'</div></li>';
 					}
 				else if(itemLocation.indexOf('m') != -1 &&itemLocation.length < 3)
 					{
@@ -361,14 +360,77 @@ function createMenuItem(xml, menuIndex, itemName, itemLocation)
 			if(language == 'sp')
 				{
 					
+					
+				if(type == 'module')
+						{
+							correctLang = 'Módulo '+ location;
+						}
+					else if(type == 'section')
+						{
+							correctLang = 'Módulo '+ location;
+						}
+					else if(type == 'part')
+						{
+							correctLang = 'Sección '+ location;
+						}
+					else if(type == 'introduction')
+						{
+							correctLang = 'Introducción ';
+						}
+					else if(type == 'conclusion')
+						{
+							correctLang = 'Conclusión ';
+						}	
+					
 				}
 			else if(language == 'fr')
 				{
 					
+					if(type == 'module')
+						{
+							correctLang = 'Module '+ location;
+						}
+					else if(type == 'section')
+						{
+							correctLang = 'Module '+ location;
+						}
+					else if(type == 'part')
+						{
+							correctLang = 'Section '+ location;
+						}
+					else if(type == 'introduction')
+						{
+							correctLang = 'Présentation ';
+						}
+					else if(type == 'conclusion')
+						{
+							correctLang = 'Conclusion ';
+						}	
 				}
 			else if(language == 'pr')
 				{
 					
+					
+					if(type == 'module')
+						{
+							correctLang = 'Módulo '+ location;
+						}
+					else if(type == 'section')
+						{
+							correctLang = 'Módulo '+ location;
+						}
+					else if(type == 'part')
+						{
+							correctLang = 'Seção '+ location;
+						}
+					else if(type == 'introduction')
+						{
+							correctLang = 'Apresentação ';
+						}
+					else if(type == 'conclusion')
+						{
+							correctLang = 'Conclusão ';
+						}	
 				}
 			else
 				{
@@ -399,6 +461,115 @@ function createMenuItem(xml, menuIndex, itemName, itemLocation)
 		}
 	
 	
+function langCheckForTitle(type, location)
+		{
+			
+			correctLange = '';
+			
+			
+			if(language == 'sp')
+				{
+					
+					
+				if(type == 'module')
+						{
+							correctLang = 'Módulo '+ location;
+						}
+					else if(type == 'section')
+						{
+							correctLang = 'Sección '+ location;
+						}
+					else if(type == 'part')
+						{
+							correctLang = 'Parte '+ location;
+						}
+					else if(type == 'introduction')
+						{
+							correctLang = 'Introducción ';
+						}
+					else if(type == 'conclusion')
+						{
+							correctLang = 'Conclusión ';
+						}	
+					
+				}
+			else if(language == 'fr')
+				{
+					
+					if(type == 'module')
+						{
+							correctLang = 'Module '+ location;
+						}
+					else if(type == 'section')
+						{
+							correctLang = 'Section '+ location;
+						}
+					else if(type == 'part')
+						{
+							correctLang = 'partie '+ location;
+						}
+					else if(type == 'introduction')
+						{
+							correctLang = 'Présentation ';
+						}
+					else if(type == 'conclusion')
+						{
+							correctLang = 'Conclusion ';
+						}	
+				}
+			else if(language == 'pr')
+				{
+					
+					
+					if(type == 'module')
+						{
+							correctLang = 'Módulo '+ location;
+						}
+					else if(type == 'section')
+						{
+							correctLang = 'Seção '+ location;
+						}
+					else if(type == 'part')
+						{
+							correctLang = 'Parte '+ location;
+						}
+					else if(type == 'introduction')
+						{
+							correctLang = 'Apresentação ';
+						}
+					else if(type == 'conclusion')
+						{
+							correctLang = 'Conclusão ';
+						}	
+				}
+			else
+				{
+					if(type == 'module')
+						{
+							correctLang = 'Module '+ location;
+						}
+					else if(type == 'section')
+						{
+							correctLang = 'Module '+ location;
+						}
+					else if(type == 'part')
+						{
+							correctLang = 'Section '+ location;
+						}
+					else if(type == 'introduction')
+						{
+							correctLang = 'Introduction';
+						}
+					else if(type == 'conclusion')
+						{
+							correctLang = 'Conclusion';
+						}
+				}
+			
+			
+			return correctLang;	
+		}
+	
 function getLocation(menuIndex, itemName,xml)
 	{
 		var location;
@@ -411,15 +582,15 @@ function getLocation(menuIndex, itemName,xml)
 			}
 		else if(itemName.indexOf('p') != -1)
 			{
-					location = "Part " + itemName.split('p')[1] + ":";
+					location = langCheckForTitle('part',itemName.split('p')[1]);
 			}
 		else if(itemName.indexOf('s') != -1)
 			{
-				location = "Section " + itemName.split('s')[1] + ":";
+				location = langCheckForTitle('section',itemName.split('s')[1]);
 			}
 		else if(itemName.indexOf('m') != -1)
 			{
-				location = "Module " + itemName.split('m')[1] + ":";	
+				location = langCheckForTitle('module',itemName.split('m')[1]);	
 			}
 		
 		
@@ -439,7 +610,7 @@ function addToConsole(message)
 	
 	}
 
-function setLocation(location)
+function setLocation(location,xml)
 	{
 		if(location === '0')
 			{
@@ -450,10 +621,10 @@ function setLocation(location)
 				pageIndex = location;
 			}	
 		
-		createLesson(pageIndex);
+		createLesson(pageIndex, xml);
 	}
 
-function createLesson(pageIndex)
+function createLesson(pageIndex, xml)
 	{	
 		$("#test").empty();
 		$("#test").append('<video id="lessonplayer" class="video-js" width="640" height="360" controls="controls" preload="auto"><source src="videos/'+pageIndex+'.mov" type=\'video/mp4; codecs="avc1.42E01E, mp4a.40.2"\' /><object id="flash_fallback_1" class="vjs-flash-fallback" width="640" height="360" type="application/x-shockwave-flash" data="scripts/flowplayer-3.2.7.swf"><param name="movie" value="scripts/flowplayer-3.2.7.swf" /><param name="allowfullscreen" value="false" /><param name="flashvars" value=\'config={"playlist":[ {"url": "videos/'+pageIndex+'.mov","autoPlay":false,"autoBuffering":true}]}\' /></object></video>');
@@ -461,7 +632,7 @@ function createLesson(pageIndex)
 		VideoJS.setup('lessonplayer');
 		
 		currentLessonName = videos[pageIndex].split('/@')[1];
-		
+		createMenu(xml);
 		setLessonName(currentLessonName);
 			
 	}
