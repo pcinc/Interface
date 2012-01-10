@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<coursedata>
+		<course coursename="Navistar® HVAC 2010 Update" language="en" lockstepping="false" introduction="true" theme="int" offline="false" studyguide="true" glossary="true" group="tech" console="true">
+			<module>
+				<title>Introduction</title>
+				<text></text>
+			</module>
+			<module>
+				<title>Module 1</title>
+				<text></text>
+				<section>
+					<title>Module 1: Section 1</title>
+					<text></text>
+				</section>
+				<section>
+					<title>Module 1: Section 2</title>
+					<text></text>
+				</section>
+				<section type="exercise">
+					<title>Module 1: Section 3</title>
+					<text></text>
+				</section>
+			</module>
+			<module>
+				<title>Module 2:</title>
+				<text></text>
+			</module>
+			<module>
+				<title>Module 3</title>
+				<text></text>
+				<section>
+					<title>Module 3: Section 1</title>
+					<text></text>
+				</section>
+				<section>
+					<title>Module 3: Section 2</title>
+					<text></text>
+				</section>
+				<section>
+					<title>Module 3: Section 3</title>
+					<text></text>
+				</section>
+			</module>
+			<module>
+				<title>Module 4</title>
+				<text></text>
+				
+				<section>
+					<title>Module 4: Section 1</title>
+					<text></text>
+				</section>
+				
+				<section>
+					<title>Module 4: Section 2</title>
+					<text></text>
+					
+					<part type="excercise">
+						<title>Module 4: Section 2: Part 1</title>
+						<text></text>
+					</part>
+					
+					<part>
+						<title>Module 4: Section 2: Part 2</title>
+						<text></text>
+					</part>
+					
+					<part>
+						<title>Module 4: Section 2: Part 3</title>
+						<text></text>
+					</part>
+					
+				</section>
+				
+			</module>
+			
+			<module>
+				<title>Conclusion</title>
+				<text></text>
+			</module>
+		</course>
+	</coursedata>

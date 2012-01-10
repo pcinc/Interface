@@ -14,12 +14,13 @@ var courseLength;
 var completedList = new Array();
 var videos = new Array();
 var menuShown = 'true';
-var pageIndex;
-var lesson_location = '0';
+var currentLocation = 0;
 var currentLessonName = '';
 var clickIndex = 0;
 var locations = new Array();
+var location;
 var console;
+var completedList = new Array;
 
 // Start function when DOM has completely loaded 
 $(document).ready(function(){ 
@@ -101,7 +102,7 @@ function parseXml(xml)
 	{
 		setAttributes(xml);
 		createVideoArray(xml);
-		setLocation(lesson_location,xml);
+		setLocation(currentLocation,xml);
 		loadStyle(theme);
 	}
  
@@ -173,7 +174,7 @@ function setAttributes(xml)
 		
 		addToConsole("Group: "+group);
 		
-		addToConsole("Console: "+console);
+		addToConsole("Console: "+debugConsole);
 		
 		addToConsole("--------------------------------------------");
 		
@@ -300,46 +301,77 @@ function createMenuItem(xml, menuIndex, itemName, itemLocation)
 	{
 		var menuItemString = '';
 		//addToConsole(menuIndex);
-		
-		if(introduction == 'true' )
+		if(group == 'tech')
 			{
-				if(itemLocation.indexOf('m0') != -1)
-					{				
-						menuItemString = '<li id="modulebreak" style="width: 176px; height: 16px; "><div id="breaktitle"><span>'+langCheck('introduction',itemLocation.split('m')[1])+'</span><div id="menudeco"></div></div></li><li id="menuItem" onclick="createLesson('+menuIndex+')"><div id="sectionname">'+getLocation(menuIndex,itemLocation, xml)+'</div><div id="sectiontitle">'+ itemName+'</div></li>';
-					}
-				else if(itemLocation.indexOf('m') != -1 &&itemLocation.length < 3)
+				if(introduction == 'true' )
 					{
-						
-						if(itemLocation === 'm'+($(xml).find('module').length - 1) )
+						if(itemLocation.indexOf('m0') != -1)
+							{				
+								menuItemString = '<li id="modulebreak" style="width: 176px; height: 16px; "><div id="breaktitle"><span>'+langCheck('introduction',itemLocation.split('m')[1])+'</span><div id="menudeco"></div></div></li><li id="menuItem" onclick="createLesson('+menuIndex+')"><div id="sectionname">'+getLocation(menuIndex,itemLocation, xml)+'</div><div id="sectiontitle">'+ itemName+'</div></li>';
+							}
+						else if(itemLocation.indexOf('m') != -1 &&itemLocation.length < 3)
 							{
-								menuItemString = '<li id="modulebreak" style="width: 176px; height: 16px; "><div id="breaktitle"><span>'+langCheck('conclusion',itemLocation.split('m')[1])+'</span><div id="menudeco"></div></div></li><li id="menuItem" onclick="createLesson('+menuIndex+')"><div id="sectionname">'+getLocation(menuIndex,itemLocation, xml)+'</div><div id="sectiontitle">'+ itemName+'</div></li>';			
+								
+								if(itemLocation === 'm'+($(xml).find('module').length - 1) )
+									{
+										menuItemString = '<li id="modulebreak" style="width: 176px; height: 16px; "><div id="breaktitle"><span>'+langCheck('conclusion',itemLocation.split('m')[1])+'</span><div id="menudeco"></div></div></li><li id="menuItem" onclick="createLesson('+menuIndex+')"><div id="sectionname">'+getLocation(menuIndex,itemLocation, xml)+'</div><div id="sectiontitle">'+ itemName+'</div></li>';			
+									}
+								else
+									{
+										menuItemString = '<li id="modulebreak" style="width: 176px; height: 16px; "><div id="breaktitle"><span>'+langCheck('module',itemLocation.split('m')[1])+'</span><div id="menudeco"></div></div></li><li id="menuItem" onclick="createLesson('+menuIndex+')"><div id="sectionname">'+getLocation(menuIndex,itemLocation, xml)+'</div><div id="sectiontitle">'+ itemName+'</div></li>';
+									}
+							}
+						else if(itemLocation.indexOf('s1') != -1)
+							{
+								menuItemString = '<li id="modulebreak" style="width: 176px; height: 16px;"><div id="breaktitle"><span>'+langCheck('section',itemLocation.split('m')[1].split('s')[0])+'</span><div id="menudeco"></div></div></li><li id="menuItem" onclick="createLesson('+menuIndex+')"><div id="sectionname">'+getLocation(menuIndex,itemLocation, xml)+'</div><div id="sectiontitle">'+ itemName+'</div></li>';
+							}
+						else if(itemLocation.indexOf('p1') != -1)
+							{
+								menuItemString = '<li id="modulebreak" style="width: 162px; height: 16px; margin: 10px 0px 0px 10px;"><div id="breaktitle"><span>'+langCheck('part',itemLocation.split('m')[1].split('s')[1].split('p')[0])+'</span><div id="menudeco"></div></div></li><li id="menuItem" onclick="createLesson('+menuIndex+')" style="width: 142px; height: 80px; margin-left: 28px;"><div id="sectionname" style=" width: 142px; font-size:6pt;">'+getLocation(menuIndex,itemLocation, xml)+'</div><div id="sectiontitle" style="width:142px;font-size:8pt;">'+ itemName+'</div></li>';
 							}
 						else
 							{
-								menuItemString = '<li id="modulebreak" style="width: 176px; height: 16px; "><div id="breaktitle"><span>'+langCheck('module',itemLocation.split('m')[1])+'</span><div id="menudeco"></div></div></li><li id="menuItem" onclick="createLesson('+menuIndex+')"><div id="sectionname">'+getLocation(menuIndex,itemLocation, xml)+'</div><div id="sectiontitle">'+ itemName+'</div></li>';
+								if(itemLocation.indexOf('p') != -1)
+									{
+										menuItemString = '<li id="menuItem" onclick="createLesson('+menuIndex+')" style="width: 142px; height: 80px; margin-left: 28px;"><div id="sectionname" style=" width: 142px;font-size:6pt;">'+getLocation(menuIndex,itemLocation, xml)+'</div><div id="sectiontitle" style="width:142px;font-size:8pt;">'+ itemName+'</div></li>';
+									}
+								else
+									{
+										menuItemString = '<li id="menuItem" onclick="createLesson('+menuIndex+')"><div id="sectionname">'+getLocation(menuIndex,itemLocation, xml)+'</div><div id="sectiontitle">'+ itemName+'</div></li>';
+									}
 							}
 					}
-				else if(itemLocation.indexOf('s1') != -1)
+			
+			else
+				{
+				}
+			}
+		else if(group == "sales")
+			{
+				if(introduction == 'true' )
 					{
-						menuItemString = '<li id="modulebreak" style="width: 176px; height: 16px;"><div id="breaktitle"><span>'+langCheck('section',itemLocation.split('m')[1].split('s')[0])+'</span><div id="menudeco"></div></div></li><li id="menuItem" onclick="createLesson('+menuIndex+')"><div id="sectionname">'+getLocation(menuIndex,itemLocation, xml)+'</div><div id="sectiontitle">'+ itemName+'</div></li>';
-					}
-				else if(itemLocation.indexOf('p1') != -1)
-					{
-						menuItemString = '<li id="modulebreak" style="width: 162px; height: 16px; margin: 10px 0px 0px 10px;"><div id="breaktitle"><span>'+langCheck('part',itemLocation.split('m')[1].split('s')[1].split('p')[0])+'</span><div id="menudeco"></div></div></li><li id="menuItem" onclick="createLesson('+menuIndex+')" style="width: 142px; height: 80px; margin-left: 28px;"><div id="sectionname" style=" width: 142px; font-size:6pt;">'+getLocation(menuIndex,itemLocation, xml)+'</div><div id="sectiontitle" style="width:142px;font-size:8pt;">'+ itemName+'</div></li>';
-					}
-				else
-					{
-						if(itemLocation.indexOf('p') != -1)
-							{
-								menuItemString = '<li id="menuItem" onclick="createLesson('+menuIndex+')" style="width: 142px; height: 80px; margin-left: 28px;"><div id="sectionname" style=" width: 142px;font-size:6pt;">'+getLocation(menuIndex,itemLocation, xml)+'</div><div id="sectiontitle" style="width:142px;font-size:8pt;">'+ itemName+'</div></li>';
-							}
-						else
-							{
+						if(itemLocation.indexOf('m0') != -1)
+							{				
 								menuItemString = '<li id="menuItem" onclick="createLesson('+menuIndex+')"><div id="sectionname">'+getLocation(menuIndex,itemLocation, xml)+'</div><div id="sectiontitle">'+ itemName+'</div></li>';
 							}
+						else
+							{
+								if(itemLocation === 'm'+($(xml).find('module').length - 1) )
+									{
+										menuItemString = '<li id="menuItem" onclick="createLesson('+menuIndex+')"><div id="sectionname">'+getLocation(menuIndex,itemLocation, xml)+'</div><div id="sectiontitle">'+ itemName+'</div></li>';			
+									}
+								else
+									{
+										menuItemString = '<li id="menuItem" onclick="createLesson('+menuIndex+')"><div id="sectionname">'+getLocation(menuIndex,itemLocation, xml)+'</div><div id="sectiontitle">'+ itemName+'</div></li>';
+									}
+							}
 					}
+				else
+			{
+				
 			}
-		
+					
+			}
 		else
 			{
 			}
@@ -355,8 +387,7 @@ function createMenuItem(xml, menuIndex, itemName, itemLocation)
 		{
 			
 			correctLange = '';
-			
-			
+						
 			if(language == 'sp')
 				{
 					
@@ -491,6 +522,10 @@ function langCheckForTitle(type, location)
 						{
 							correctLang = 'Conclusión ';
 						}	
+					else if(type == 'station')
+						{
+							correctLang = 'Estación ' + location;
+						}
 					
 				}
 			else if(language == 'fr')
@@ -516,6 +551,10 @@ function langCheckForTitle(type, location)
 						{
 							correctLang = 'Conclusion ';
 						}	
+					else if(type == 'station')
+						{
+							correctLang = 'Gare ' + location;
+						}
 				}
 			else if(language == 'pr')
 				{
@@ -541,6 +580,10 @@ function langCheckForTitle(type, location)
 						{
 							correctLang = 'Conclusão ';
 						}	
+					else if(type == 'station')
+						{
+							correctLang = 'Estação ' + location;
+						}
 				}
 			else
 				{
@@ -564,6 +607,10 @@ function langCheckForTitle(type, location)
 						{
 							correctLang = 'Conclusion';
 						}
+					else if(type == 'station')
+						{
+							correctLang = 'Station ' + location;
+						}
 				}
 			
 			
@@ -576,21 +623,37 @@ function getLocation(menuIndex, itemName,xml)
 		
 		//addToConsole('m'+($(xml).find('module').length -1));
 		
-		if(itemName.indexOf('m0') != -1 || itemName.indexOf('m'+($(xml).find('module').length-1)) != -1)
+		
+		if(group == 'sales')
 			{
-				location = '';
+				if(itemName.indexOf('m0') != -1 || itemName.indexOf('m'+($(xml).find('module').length-1)) != -1)
+					{
+						location = '';
+					}
+				else if(itemName.indexOf('m') != -1)
+					{
+							location = langCheckForTitle('station',itemName.split('m')[1]);
+					}
 			}
-		else if(itemName.indexOf('p') != -1)
+		else
 			{
-					location = langCheckForTitle('part',itemName.split('p')[1]);
-			}
-		else if(itemName.indexOf('s') != -1)
-			{
-				location = langCheckForTitle('section',itemName.split('s')[1]);
-			}
-		else if(itemName.indexOf('m') != -1)
-			{
-				location = langCheckForTitle('module',itemName.split('m')[1]);	
+				
+				if(itemName.indexOf('m0') != -1 || itemName.indexOf('m'+($(xml).find('module').length-1)) != -1)
+					{
+						location = '';
+					}
+				else if(itemName.indexOf('p') != -1)
+					{
+							location = langCheckForTitle('part',itemName.split('p')[1]);
+					}
+				else if(itemName.indexOf('s') != -1)
+					{
+						location = langCheckForTitle('section',itemName.split('s')[1]);
+					}
+				else if(itemName.indexOf('m') != -1)
+					{
+						location = langCheckForTitle('module',itemName.split('m')[1]);	
+					}
 			}
 		
 		
@@ -626,15 +689,11 @@ function setLocation(location,xml)
 
 function createLesson(pageIndex, xml)
 	{	
-		$("#test").empty();
-		$("#test").append('<video id="lessonplayer" class="video-js" width="640" height="360" controls="controls" preload="auto"><source src="videos/'+pageIndex+'.mov" type=\'video/mp4; codecs="avc1.42E01E, mp4a.40.2"\' /><object id="flash_fallback_1" class="vjs-flash-fallback" width="640" height="360" type="application/x-shockwave-flash" data="scripts/flowplayer-3.2.7.swf"><param name="movie" value="scripts/flowplayer-3.2.7.swf" /><param name="allowfullscreen" value="false" /><param name="flashvars" value=\'config={"playlist":[ {"url": "videos/'+pageIndex+'.mov","autoPlay":false,"autoBuffering":true}]}\' /></object></video>');
-		$('lessonplayer').VideoJS();
-		VideoJS.setup('lessonplayer');
-		
-		currentLessonName = videos[pageIndex].split('/@')[1];
-		createMenu(xml);
-		setLessonName(currentLessonName);
+		var location;
 			
+		location = videos[pageIndex].split('/@')[0];
+		
+		lessonType(location,xml);
 	}
 
 function setLessonName(currentLessonName)
@@ -653,3 +712,74 @@ function loadStyle(theme)
 		document.getElementsByTagName("head")[0].appendChild(fileref);
 		//addToConsole("styles/"+theme+".css");
 	}
+	
+function lessonType(itemLocation, xml)
+	{
+		
+		var isExercise = checkIfExercise(itemLocation,xml);
+		
+		
+		
+		if(isExercise == 'true')
+			{
+				
+			}
+		else
+			{
+				$("#test").empty();
+				$("#test").append('<video id="lessonplayer" class="video-js" width="640" height="360" controls="controls" preload="auto" onended="lessonComplete()"><source src="videos/'+pageIndex+'.mov" type=\'video/mp4; codecs="avc1.42E01E, mp4a.40.2"\' /><object id="flash_fallback_1" class="vjs-flash-fallback" width="640" height="360" type="application/x-shockwave-flash" data="scripts/flowplayer-3.2.7.swf"><param name="movie" value="scripts/flowplayer-3.2.7.swf" /><param name="allowfullscreen" value="false" /><param name="flashvars" value=\'config={"playlist":[ {"url": "videos/'+pageIndex+'.mov","autoPlay":false,"autoBuffering":true}]}\' /></object></video>');
+				$('lessonplayer').VideoJS();
+				VideoJS.setup('lessonplayer');
+				currentLessonName = videos[pageIndex].split('/@')[1];
+				createMenu(xml);
+				setLessonName(currentLessonName);
+				var video = document.getElementsByTagName('video')[0];
+			}
+			
+	}
+	
+function checkIfExercise(location, xml)
+	{
+		var isExercise = 'false';
+		var moduleLocation = $(xml).find('module');
+		
+		if(location.indexOf('p') != -1)
+			{
+				//addToConsole($(xml).find('module').eq((location.split('m')[1]-1)).find('title').text());
+				
+				
+				//addToConsole($(xml).find('module').eq(location.split('m')[1].split('s')[1]).find('section').eq(location.split('s')[1].split('p')[1]).find('p').eq(location.split('p')[1]).attr('type'));
+				//addToConsole($(xml).find('module').eq((location.split('m')[1].split('s')[1])-1).find('section').eq((location.split('s')[1].split('p')[1])-1).find('p').eq((location.split('p')[1])-1).find('title').text());
+			}
+		else if(location.indexOf('s') != -1)
+			{
+			}
+		else if(location.indexOf('m') != -1)
+			{
+				//addToConsole($(xml).find('module').eq(location.split('m')[0]).find('title').text());
+				//addToConsole(location.split('m')[1]);
+				//$("#"+menu+" .itemMenu li:eq("+item1+")").addClass("highlight");
+				addToConsole($(""+moduleLocation+":eq("+location.split('m')[1]+")").find('title').first().text());
+			}
+		else
+			{
+			
+			}
+		
+		
+		return isExercise;
+	}
+	
+	function getName(location, xml)
+		{
+				
+		}
+	
+	function lessonComplete()
+		{
+			completedList.push(pageIndex);	
+			//videoCompleted(pageIndex);
+			doLMSSetValue("cmi.core.lesson_location", pageIndex);
+	
+	
+		}
