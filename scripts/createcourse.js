@@ -93,6 +93,12 @@ $(document).ready(function(){
 				$("#menu").animate({marginTop: moveValue}, 1000);
 			}
 	});	
+	
+	
+	$("#navmenu").bind("mousewheel",function(ev, delta) {
+    var scrollTop = $(this).scrollTop();
+    $(this).scrollTop(scrollTop-Math.round(delta));
+});
 });
 
 
@@ -276,8 +282,9 @@ function getParts(xml, moduleIndex, sectionIndex)
 	
 function createMenu(xml)
 	{
-		var menuIndex = 0;
 		
+		$("#menu").empty;
+		var menuIndex = 0;
 		
 		var str = '';
 		//str = '<li id="modulebreak" style="width: 176px; height: 16px; background-image:url(\'images/menubreak.png\');"><div></div></li><li onclick="createLesson('+menuIndex+')"><div id="sectionname">'+getLocation(menuIndex,itemName[0], xml)+'</div><div id="sectiontitle">'+ itemName[1]+'</div></li>';
@@ -687,12 +694,13 @@ function setLocation(location,xml)
 		createLesson(pageIndex, xml);
 	}
 
-function createLesson(pageIndex, xml)
+function createLesson(itemIndex, xml)
 	{	
+		pageIndex = itemIndex;
+		$('#menu').empty();
+		createMenu(xml);
 		var location;
-			
-		location = videos[pageIndex].split('/@')[0];
-		
+		location = videos[itemIndex].split('/@')[0];
 		lessonType(location,xml);
 	}
 
@@ -715,7 +723,7 @@ function loadStyle(theme)
 	
 function lessonType(itemLocation, xml)
 	{
-		
+		$("#vidPlayer").jPlayer("destroy");
 		var isExercise = checkIfExercise(itemLocation,xml);
 		
 		
@@ -726,22 +734,43 @@ function lessonType(itemLocation, xml)
 			}
 		else
 			{
-				$("#test").empty();
-				$("#test").append('<video id="lessonplayer" class="video-js" width="640" height="360" controls="controls" preload="auto" onended="lessonComplete()"><source src="videos/'+pageIndex+'.mov" type=\'video/mp4; codecs="avc1.42E01E, mp4a.40.2"\' /><object id="flash_fallback_1" class="vjs-flash-fallback" width="640" height="360" type="application/x-shockwave-flash" data="scripts/flowplayer-3.2.7.swf"><param name="movie" value="scripts/flowplayer-3.2.7.swf" /><param name="allowfullscreen" value="false" /><param name="flashvars" value=\'config={"playlist":[ {"url": "videos/'+pageIndex+'.mov","autoPlay":false,"autoBuffering":true}]}\' /></object></video>');
-				$('lessonplayer').VideoJS();
-				VideoJS.setup('lessonplayer');
 				currentLessonName = videos[pageIndex].split('/@')[1];
-				createMenu(xml);
 				setLessonName(currentLessonName);
-				var video = document.getElementsByTagName('video')[0];
+				createPlayer(pageIndex);
 			}
 			
+	}
+	
+function createPlayer(video)
+	{
+		
+		
+      $("#vidPlayer").jPlayer({
+      ready: function () {
+        $(this).jPlayer("setMedia", {
+        m4v: "videos/"+video+".mov"
+        }).jPlayer("play");
+		return false; 
+      },
+	  ended: lessonComplete(),
+      swfPath: "",
+      supplied: "m4v",
+      cssSelectorAncestor: "",
+      size: {
+        width: "640px",
+        height: "360px"
+      },
+	  //errorAlerts: "true"
+	  
+    });
+  
 	}
 	
 function checkIfExercise(location, xml)
 	{
 		var isExercise = 'false';
 		var moduleLocation = $(xml).find('module');
+		var test = 3;
 		
 		if(location.indexOf('p') != -1)
 			{
@@ -759,7 +788,7 @@ function checkIfExercise(location, xml)
 				//addToConsole($(xml).find('module').eq(location.split('m')[0]).find('title').text());
 				//addToConsole(location.split('m')[1]);
 				//$("#"+menu+" .itemMenu li:eq("+item1+")").addClass("highlight");
-				addToConsole($(""+moduleLocation+":eq("+location.split('m')[1]+")").find('title').first().text());
+				addToConsole($(moduleLocation).eq(test).find('title').first().text());
 			}
 		else
 			{
@@ -777,6 +806,7 @@ function checkIfExercise(location, xml)
 	
 	function lessonComplete()
 		{
+			
 			completedList.push(pageIndex);	
 			//videoCompleted(pageIndex);
 			doLMSSetValue("cmi.core.lesson_location", pageIndex);
